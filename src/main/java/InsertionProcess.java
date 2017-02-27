@@ -16,5 +16,8 @@ public class InsertionProcess {
         stemming.transformToStem("eater",7);
         stemming.transformToStem("eater",8);
 
+        System.out.println("Like :");
+        stemming.retrieve("eatin");
+
     }
 }

@@ -21,8 +21,6 @@ public class InsertionManager {
     public boolean insertStem(String origin,int originLocation, String stem){
       if(!stem.equals("null")){
 
-
-
           if(BTree.search(BTree.getRoot(),stem,BTree.height())==null) {
 
               treeIndex++;
@@ -73,7 +71,44 @@ public class InsertionManager {
       }
     }
 
-    public boolean retrieveWords(String inputString){
+    public boolean retrieveWords(String inputString, String stemmedQuery){
+        //if(BTree.search(BTree.getRoot(),stemmedQuery,BTree.height())!=null) {
+            //get related stems
+            ArrayList<String> assertList = new ArrayList<String>();
+            ArrayList<String> totalList = new ArrayList<String>();
+            String adjecentStem = getNextString(stemmedQuery);
+            String adjecentString = getNextString(inputString);
+            ArrayList stemList = BTree.getValues(reduceStem(stemmedQuery), adjecentStem);
+
+
+            for(int i=0;i<stemList.size();i++){
+                int index = listOfStem.indexOf(stemList.get(i)); //get tree index of stemmedQuery
+                BplusTree retrievedSubBtree = listOfBtree.get(index);
+                assertList = retrievedSubBtree.getValues(inputString, adjecentString);
+                totalList.addAll(assertList);
+            }
+            System.out.println(totalList);
+        //}
+        //else{
+            //System.out.println("No Stem available");
+            //boolean ismatched = false;
+            //while(!ismatched){
+                //String newStem = reduceString(stemmedQuery);
+
+            //}
+       // }
         return true;
+    }
+
+    public String getNextString(String word){
+        return word.substring(0, word.length()-1) + (char)((int) (word.charAt(word.length()-1)) + 1);
+    }
+
+    public String reduceStem(String word){
+        if(word.length()>=3){
+            return word.substring(0,2) ;
+        }
+        else return word;
+
     }
 }

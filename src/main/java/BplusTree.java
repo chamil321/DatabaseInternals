@@ -267,7 +267,7 @@ public class BplusTree<Key extends Comparable<Key>, Value>  {
         return list;
     }
 
-    private ArrayList<Object> getValues(Key min, Key max){
+    public ArrayList<Object> getValues(Key min, Key max){
         ArrayList<Object> rangeContent = new ArrayList<Object>();
         ;
         Key max_point = max;
