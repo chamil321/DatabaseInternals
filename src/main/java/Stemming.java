@@ -9,8 +9,14 @@ public class Stemming {
 
     String origin,stem,query,stemmedQuery;
     Integer location;
-    InsertionManager insertionManager = new InsertionManager();
-    Stemmer stemmer = new PorterStemmer();
+    InsertionManager insertionManager ;
+    Stemmer stemmer;
+
+    public Stemming() {
+        insertionManager = new InsertionManager();
+        stemmer = new PorterStemmer();
+    }
+
 
     public void transformToStem(String origin, Integer location){
 

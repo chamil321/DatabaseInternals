@@ -42,7 +42,7 @@ public class InsertionManager {
               int index = listOfStem.indexOf(stem); //get tree index of stem
               BplusTree retrievedSubBtree = listOfBtree.get(index);
 
-              if(retrievedSubBtree.search(retrievedSubBtree.getRoot(),origin,BTree.height())==null){
+              if(retrievedSubBtree.search(retrievedSubBtree.getRoot(),origin,retrievedSubBtree.height())==null){
                   listOfOrigins = new ArrayList<Integer>();     //new list to this word
                   listOfOrigins.add(originLocation);
                   retrievedSubBtree.put(origin,listOfOrigins);
@@ -61,9 +61,6 @@ public class InsertionManager {
               //list.get()
 
           }
-
-          System.out.println("Main Btree");
-          System.out.println(BTree);
           return true;
       }else{
 
@@ -85,9 +82,16 @@ public class InsertionManager {
                 int index = listOfStem.indexOf(stemList.get(i)); //get tree index of stemmedQuery
                 BplusTree retrievedSubBtree = listOfBtree.get(index);
                 assertList = retrievedSubBtree.getValues(inputString, adjecentString);
+                for(int k=0;k<assertList.size();k++){
+                    System.out.println(assertList.get(k)+":"+retrievedSubBtree.getList(retrievedSubBtree.getRoot(),assertList.get(k),retrievedSubBtree.height()));
+                }
                 totalList.addAll(assertList);
             }
-            System.out.println(totalList);
+            //System.out.println(totalList);
+
+
+
+
         //}
         //else{
             //System.out.println("No Stem available");
@@ -110,5 +114,11 @@ public class InsertionManager {
         }
         else return word;
 
+    }
+
+    public BplusTree showTree(){
+        System.out.println("Main Btree");
+        System.out.println(this.BTree);
+        return this.BTree;
     }
 }
